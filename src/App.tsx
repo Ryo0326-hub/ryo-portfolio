@@ -11,12 +11,13 @@ import { BottomNav } from './components/BottomNav';
 import { OverviewView } from './components/OverviewView';
 import { ExperienceView } from './components/ExperienceView';
 import { ProjectsView } from './components/ProjectsView';
-import { CertificationsView } from './components/CertificationsView';
 import { ContactModal } from './components/ContactModal';
+import { ResumeModal } from './components/ResumeModal';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<TabType>('overview');
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   // Scroll to top on tab switch
   useEffect(() => {
@@ -27,6 +28,9 @@ export default function App() {
     <div className="min-h-screen bg-[#131315] text-[#e5e1e4] flex flex-col items-center selection:bg-[#4cd7f6]/20 selection:text-[#4cd7f6]">
       {/* Contact modal accessible globally */}
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+
+      {/* Resume modal with preview & download */}
+      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
 
       {/* Background technical grid texture */}
       <div 
@@ -44,6 +48,7 @@ export default function App() {
           currentTab={currentTab} 
           onSelectTab={setCurrentTab} 
           onOpenContact={() => setIsContactOpen(true)} 
+          onOpenResume={() => setIsResumeOpen(true)}
         />
 
         {/* Tab View Container with Smooth Motion Transitions */}
@@ -57,7 +62,10 @@ export default function App() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.18, ease: 'easeOut' }}
               >
-                <OverviewView onNavigateToProjects={() => setCurrentTab('projects')} />
+                <OverviewView 
+                  onNavigateToProjects={() => setCurrentTab('projects')} 
+                  onOpenResume={() => setIsResumeOpen(true)}
+                />
               </motion.div>
             )}
 
@@ -82,18 +90,6 @@ export default function App() {
                 transition={{ duration: 0.18, ease: 'easeOut' }}
               >
                 <ProjectsView />
-              </motion.div>
-            )}
-
-            {currentTab === 'certifications' && (
-              <motion.div
-                key="certifications"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.18, ease: 'easeOut' }}
-              >
-                <CertificationsView />
               </motion.div>
             )}
           </AnimatePresence>

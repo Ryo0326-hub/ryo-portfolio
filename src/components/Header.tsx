@@ -6,9 +6,10 @@ interface HeaderProps {
   currentTab: TabType;
   onSelectTab: (tab: TabType) => void;
   onOpenContact?: () => void;
+  onOpenResume?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenContact }) => {
+export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenContact, onOpenResume }) => {
   return (
     <header id="app-header" className="sticky top-0 z-50 w-full bg-[#0c0d10]/95 backdrop-blur-xl border-b border-[#202126]">
       {/* Mobile Top Header */}
@@ -21,23 +22,27 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
           <div className="w-8 h-8 rounded-lg bg-[#16171b] border border-[#27282e] group-hover:border-[#4cd7f6]/60 flex items-center justify-center font-mono text-xs font-bold text-[#4cd7f6] shadow-sm transition-colors shrink-0">
             RK
           </div>
-          <div className="flex flex-col justify-center">
-            <div className="flex items-center gap-1.5 leading-tight">
-              <span className="font-mono text-[13px] text-[#e5e1e4] font-semibold tracking-tight">ryo.kitano</span>
-              <span className="font-mono text-[10px] text-zinc-600">//</span>
-              <span className="font-mono text-[11px] text-[#4cd7f6] font-medium capitalize">{currentTab}</span>
-            </div>
-            <span className="font-sans text-[11px] text-[#8e9099] font-normal leading-tight">
-              AI/ML • UWaterloo Math
-            </span>
-          </div>
+          <span className="font-mono text-sm text-[#e5e1e4] font-semibold tracking-tight">ryo.kitano</span>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#12221b] border border-[#1b3d2e] text-[#34d399] shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#34d399] animate-pulse"></span>
-            <span className="font-mono text-[10px] uppercase font-semibold tracking-wide">UWaterloo</span>
-          </div>
+          {/* Mobile Resume Link */}
+          <a
+            id="mobile-header-resume-btn"
+            href="/Resume.pdf"
+            onClick={(e) => {
+              if (onOpenResume) {
+                e.preventDefault();
+                onOpenResume();
+              }
+            }}
+            className="h-8 px-2.5 rounded-lg bg-[#16171b] hover:bg-[#202127] active:scale-95 border border-[#27282e] text-zinc-200 hover:text-white font-mono text-[11px] font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+            aria-label="View Resume"
+          >
+            <FileText className="w-3.5 h-3.5 text-[#38bdf8]" />
+            <span>Resume</span>
+          </a>
+
           {onOpenContact && (
             <button
               id="mobile-header-contact-btn"
@@ -62,23 +67,9 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
             className="flex items-center gap-2.5 text-[#e5e1e4] hover:text-[#4cd7f6] transition-colors group cursor-pointer text-left"
           >
             <div className="w-7 h-7 rounded-md bg-[#161f26] border border-[#203c4c] flex items-center justify-center font-mono text-xs font-semibold text-[#38bdf8] group-hover:border-[#38bdf8]/70 transition-colors">
-              {currentTab === 'overview' ? 'RK' : 'R*'}
+              RK
             </div>
-            <div className="flex items-center gap-1.5 font-mono text-sm font-medium">
-              <span className="text-[#e5e1e4]">ryo.kitano</span>
-              {currentTab === 'experience' && (
-                <>
-                  <span className="text-zinc-600">//</span>
-                  <span className="text-zinc-400 text-xs">ai-eng</span>
-                </>
-              )}
-              {(currentTab === 'projects' || currentTab === 'certifications') && (
-                <>
-                  <span className="text-zinc-600">//</span>
-                  <span className="text-zinc-400 text-xs">portfolio</span>
-                </>
-              )}
-            </div>
+            <span className="font-mono text-sm font-semibold tracking-tight text-[#e5e1e4]">ryo.kitano</span>
           </button>
         </div>
 
@@ -128,17 +119,6 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
             Projects
           </button>
           <button
-            id="desktop-nav-certifications"
-            onClick={() => onSelectTab('certifications')}
-            className={`px-3.5 py-1.5 font-mono text-xs rounded-md transition-all cursor-pointer ${
-              currentTab === 'certifications'
-                ? 'bg-[#15232d] text-[#38bdf8] font-medium border border-[#204052]'
-                : 'text-zinc-400 hover:text-white hover:bg-[#16171b]'
-            }`}
-          >
-            Certifications
-          </button>
-          <button
             id="desktop-nav-contact"
             onClick={onOpenContact}
             className="px-3.5 py-1.5 font-mono text-xs text-zinc-400 hover:text-white hover:bg-[#16171b] rounded-md transition-colors cursor-pointer"
@@ -152,11 +132,11 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
           {/* Resume button */}
           <a
             id="header-resume-link"
-            href="mailto:contact@ryokitano.com?subject=Resume%20Request%20-%20Ryo%20Kitano"
+            href="/Resume.pdf"
             onClick={(e) => {
-              if (onOpenContact) {
+              if (onOpenResume) {
                 e.preventDefault();
-                onOpenContact();
+                onOpenResume();
               }
             }}
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md font-mono text-xs transition-all cursor-pointer ${
@@ -164,8 +144,9 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
                 ? 'bg-[#00c5e0] text-[#003640] font-semibold'
                 : 'border border-[#2d2e35] bg-[#16171b] text-zinc-200 hover:border-[#38bdf8] hover:text-[#38bdf8]'
             }`}
+            title="Preview & Download Resume.pdf"
           >
-            <FileText className={`w-3.5 h-3.5 ${currentTab === 'experience' ? 'text-[#003640]' : 'text-zinc-400'}`} />
+            <FileText className={`w-3.5 h-3.5 ${currentTab === 'experience' ? 'text-[#003640]' : 'text-[#4cd7f6]'}`} />
             <span>Resume.pdf</span>
           </a>
 

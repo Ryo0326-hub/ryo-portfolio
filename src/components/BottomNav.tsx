@@ -1,6 +1,6 @@
 import React from 'react';
 import { TabType } from '../types';
-import { Terminal, Briefcase, LayoutGrid, Award } from 'lucide-react';
+import { Terminal, Briefcase, LayoutGrid } from 'lucide-react';
 
 interface BottomNavProps {
   currentTab: TabType;
@@ -23,11 +23,6 @@ export const BottomNav: React.FC<BottomNavProps> = ({ currentTab, onSelectTab })
       id: 'projects',
       label: 'Projects',
       icon: <LayoutGrid className="w-4 h-4" />
-    },
-    {
-      id: 'certifications',
-      label: 'Certs',
-      icon: <Award className="w-4 h-4" />
     }
   ];
 
@@ -36,7 +31,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ currentTab, onSelectTab })
       id="bottom-navigation-bar"
       className="md:hidden fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-[#0c0d10]/95 backdrop-blur-xl border-t border-[#202126] shadow-2xl"
     >
-      <div className="grid grid-cols-4 items-center h-14 px-2 max-w-md mx-auto">
+      <div className="grid grid-cols-3 items-center h-14 px-2 max-w-md mx-auto">
         {navItems.map((item) => {
           const isActive = currentTab === item.id;
           return (

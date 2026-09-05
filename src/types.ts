@@ -1,4 +1,4 @@
-export type TabType = 'overview' | 'experience' | 'projects' | 'certifications' | 'contact';
+export type TabType = 'overview' | 'experience' | 'projects' | 'contact';
 
 export interface Project {
   id: string;

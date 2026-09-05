@@ -3,7 +3,7 @@ import { Project, ExperienceItem, CertificationItem } from '../types';
 export const PROFILE_INFO = {
   name: 'Ryo Kitano',
   handle: 'ryo.kitano',
-  title: 'AI / ML Engineer | Mathematics @ University of Waterloo',
+  title: 'Jr AI/ML Engineer | Mathematics @ University of Waterloo',
   bio: 'My interests span machine learning, cryptography, and mathematical optimization. I have hands-on experience developing computer vision systems, LLM-powered applications, model-routing architectures, and data-driven products. I particularly enjoy translating research ideas and mathematical concepts into tools that solve real-world problems.',
   status: 'AVAILABLE FOR WINTER 2026 CO-OP',
   location: 'Waterloo, ON',
@@ -20,7 +20,6 @@ export const PROFILE_INFO = {
     location: 'Waterloo, ON',
     degree: 'Bachelor of Mathematics, Honours, Co-operative Program',
     period: 'Sep. 2024 – May 2029',
-    award: 'President’s Scholarship (2025)',
     coursework: [
       'Optimization',
       'Probability',
@@ -161,7 +160,7 @@ export const PROJECTS: Project[] = [
     hasImage: true,
     githubUrl: 'https://github.com/Ryo0326-hub/agent-apple',
     badges: {
-      event: 'Fintech & MCP',
+      event: 'Alpaca AI Trading Hackathon',
       organization: 'GitHub',
       actionText: 'GitHub Repo',
       actionUrl: 'https://github.com/Ryo0326-hub/agent-apple'
@@ -300,67 +299,67 @@ export const PROJECTS: Project[] = [
 
 export const CERTIFICATIONS: CertificationItem[] = [
   {
-    id: 'deep-learning',
-    title: 'Deep Learning Specialization',
-    issuer: 'DeepLearning.AI',
-    description: 'Neural networks, backprop, hyperparameter tuning, CNNs, and sequence models by Andrew Ng.',
-    statusText: '4 of 5 Courses Completed',
-    iconType: 'deeplearning',
-    status: 'In Progress'
-  },
-  {
     id: 'ai-engineer',
     title: 'AI Engineer for Developers',
     issuer: 'Professional Accreditation',
     description: 'LLM orchestration patterns, RAG pipelines, vector search, and production inference deployment.',
-    statusText: 'Associate Level',
+    statusText: 'Completed',
     iconType: 'ai',
-    status: 'In Progress'
+    status: 'Completed'
   },
   {
     id: 'sql-associate',
     title: 'SQL Associate Certification',
     issuer: 'Database Systems',
     description: 'Relational schema normalization, complex window functions, and query optimization plans.',
-    statusText: 'Query Optimization Focus',
+    statusText: 'In Progress',
     iconType: 'database',
     status: 'In Progress'
   },
   {
-    id: 'azure-fundamentals',
-    title: 'Azure Fundamentals (AZ-900)',
-    issuer: 'Microsoft Azure',
-    description: 'Cloud architecture components, virtual networks, identity services, governance, and compliance.',
-    statusText: 'Core Infrastructure',
-    iconType: 'azure',
-    status: 'In Progress'
+    id: 'deep-learning',
+    title: 'Deep Learning Specialization',
+    issuer: 'DeepLearning.AI',
+    description: 'Neural networks, backprop, hyperparameter tuning, CNNs, and sequence models by Andrew Ng.',
+    statusText: 'Not Started',
+    iconType: 'deeplearning',
+    status: 'Not Started'
   },
   {
     id: 'aws-cloud-practitioner',
     title: 'AWS Cloud Practitioner (CLF-C02)',
     issuer: 'Amazon Web Services',
     description: 'Serverless architectures (Lambda), compute (EC2), S3 storage, and IAM security matrices.',
-    statusText: 'Cloud Foundations',
+    statusText: 'Not Started',
     iconType: 'aws',
-    status: 'In Progress'
+    status: 'Not Started'
+  },
+  {
+    id: 'azure-fundamentals',
+    title: 'Azure Fundamentals (AZ-900)',
+    issuer: 'Microsoft Azure',
+    description: 'Cloud architecture components, virtual networks, identity services, governance, and compliance.',
+    statusText: 'Not Started',
+    iconType: 'azure',
+    status: 'Not Started'
   },
   {
     id: 'google-cloud-certified',
     title: 'Google Cloud Certified',
     issuer: 'Google Cloud',
     description: 'BigQuery analytics, Vertex AI machine learning pipelines, and container deployment on GKE.',
-    statusText: 'Cloud Engineering',
+    statusText: 'Not Started',
     iconType: 'gcp',
-    status: 'In Progress'
+    status: 'Not Started'
   },
   {
     id: 'github-foundations',
-    title: 'GitHub Foundations Certification',
+    title: 'GitHub Foundations',
     issuer: 'GitHub Official',
-    description: 'Advanced Git branching strategies, automated CI/CD with GitHub Actions, secret management, and repository governance.',
-    statusText: 'Developer Tools',
+    description: 'Git branching workflows, automated CI/CD with GitHub Actions, and repository security.',
+    statusText: 'Not Started',
     iconType: 'github',
-    status: 'In Progress'
+    status: 'Not Started'
   }
 ];
 

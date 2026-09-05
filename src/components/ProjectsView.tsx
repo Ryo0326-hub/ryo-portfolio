@@ -19,6 +19,32 @@ export const ProjectsView: React.FC = () => {
   const [mobileCategory, setMobileCategory] = useState<'all' | 'agentic' | 'systems'>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [certFilter, setCertFilter] = useState<'all' | 'ai-data' | 'cloud-devops'>('all');
+
+  const getCertIcon = (type: string | undefined) => {
+    switch (type) {
+      case 'ai':
+        return <Sparkles className="w-3.5 h-3.5 text-[#34d399]" />;
+      case 'database':
+        return <Database className="w-3.5 h-3.5 text-[#38bdf8]" />;
+      case 'deeplearning':
+        return <Brain className="w-3.5 h-3.5 text-[#a78bfa]" />;
+      case 'github':
+        return <Github className="w-3.5 h-3.5 text-zinc-200" />;
+      case 'aws':
+      case 'azure':
+      case 'gcp':
+      default:
+        return <Cloud className="w-3.5 h-3.5 text-[#38bdf8]" />;
+    }
+  };
+
+  const aiAndDataCerts = CERTIFICATIONS.filter((c) =>
+    ['ai-engineer', 'sql-associate', 'deep-learning'].includes(c.id)
+  );
+  const cloudAndDevOpsCerts = CERTIFICATIONS.filter((c) =>
+    ['aws-cloud-practitioner', 'azure-fundamentals', 'google-cloud-certified', 'github-foundations'].includes(c.id)
+  );
 
   const desktopFilters = [
     { id: 'all', label: 'All (4)' },
@@ -38,7 +64,7 @@ export const ProjectsView: React.FC = () => {
       hasImage: true,
       image: 'https://opengraph.githubassets.com/1/Ryo0326-hub/agent-apple',
       tagBadge: 'AGENTIC & FINTECH',
-      subtitleTag: 'Alpaca MCP',
+      subtitleTag: 'Alpaca AI Trading Hackathon',
       actionText: 'GitHub ↗',
       actionUrl: 'https://github.com/Ryo0326-hub/agent-apple',
       githubUrl: 'https://github.com/Ryo0326-hub/agent-apple',
@@ -252,36 +278,94 @@ export const ProjectsView: React.FC = () => {
             </h2>
           </div>
 
-          <div className="flex flex-col space-y-2">
-            {CERTIFICATIONS.map((cert) => {
-              const statusClass =
-                cert.status === 'Completed'
-                  ? 'bg-[#00a572]/20 text-[#4edea3] border border-[#00a572]/30'
-                  : cert.status === 'In Progress'
-                  ? 'bg-[#4cd7f6]/10 text-[#4cd7f6] border border-[#4cd7f6]/30'
-                  : 'bg-[#201f22] text-[#bcc9cd] border border-[#27282e]';
+          <div className="flex flex-col space-y-4">
+            {/* Mobile Track 1: AI & Data Engineering */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-400 uppercase tracking-wider pb-1 border-b border-[#25262c]">
+                <Sparkles className="w-3.5 h-3.5 text-[#4edea3]" />
+                <span>AI &amp; Data Engineering (3)</span>
+              </div>
+              <div className="flex flex-col space-y-2">
+                {aiAndDataCerts.map((cert) => {
+                  const statusClass =
+                    cert.status === 'Completed'
+                      ? 'bg-[#00a572]/20 text-[#4edea3] border border-[#00a572]/30'
+                      : cert.status === 'In Progress'
+                      ? 'bg-[#4cd7f6]/10 text-[#4cd7f6] border border-[#4cd7f6]/30'
+                      : 'bg-[#201f22] text-[#bcc9cd] border border-[#27282e]';
 
-              return (
-                <div
-                  key={cert.id}
-                  className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#1c1b1d] shadow-sm border border-[#27282e]/40"
-                >
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-[10px] font-mono uppercase text-[#bcc9cd]">
-                      {cert.issuer}
-                    </span>
-                    <h4 className="text-[15px] leading-[20px] text-[#e5e1e4] font-medium truncate font-sans">
-                      {cert.title}
-                    </h4>
-                  </div>
-                  <span
-                    className={`px-2.5 py-1 rounded-full font-mono text-[11px] whitespace-nowrap shrink-0 ${statusClass}`}
-                  >
-                    {cert.status || 'In Progress'}
-                  </span>
-                </div>
-              );
-            })}
+                  return (
+                    <div
+                      key={cert.id}
+                      className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#1c1b1d] shadow-sm border border-[#27282e]/40"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-8 h-8 rounded-lg bg-[#24252c] border border-[#32333d] flex items-center justify-center shrink-0">
+                          {getCertIcon(cert.iconType)}
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                          <span className="text-[10px] font-mono uppercase text-[#bcc9cd]">
+                            {cert.issuer}
+                          </span>
+                          <h4 className="text-[14px] leading-[18px] text-[#e5e1e4] font-medium truncate font-sans">
+                            {cert.title}
+                          </h4>
+                        </div>
+                      </div>
+                      <span
+                        className={`px-2.5 py-1 rounded-full font-mono text-[11px] whitespace-nowrap shrink-0 ${statusClass}`}
+                      >
+                        {cert.status || 'In Progress'}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Mobile Track 2: Cloud Platforms & DevOps */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-400 uppercase tracking-wider pb-1 border-b border-[#25262c]">
+                <Cloud className="w-3.5 h-3.5 text-[#4cd7f6]" />
+                <span>Cloud Platforms &amp; DevOps (4)</span>
+              </div>
+              <div className="flex flex-col space-y-2">
+                {cloudAndDevOpsCerts.map((cert) => {
+                  const statusClass =
+                    cert.status === 'Completed'
+                      ? 'bg-[#00a572]/20 text-[#4edea3] border border-[#00a572]/30'
+                      : cert.status === 'In Progress'
+                      ? 'bg-[#4cd7f6]/10 text-[#4cd7f6] border border-[#4cd7f6]/30'
+                      : 'bg-[#201f22] text-[#bcc9cd] border border-[#27282e]';
+
+                  return (
+                    <div
+                      key={cert.id}
+                      className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#1c1b1d] shadow-sm border border-[#27282e]/40"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-8 h-8 rounded-lg bg-[#24252c] border border-[#32333d] flex items-center justify-center shrink-0">
+                          {getCertIcon(cert.iconType)}
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                          <span className="text-[10px] font-mono uppercase text-[#bcc9cd]">
+                            {cert.issuer}
+                          </span>
+                          <h4 className="text-[14px] leading-[18px] text-[#e5e1e4] font-medium truncate font-sans">
+                            {cert.title}
+                          </h4>
+                        </div>
+                      </div>
+                      <span
+                        className={`px-2.5 py-1 rounded-full font-mono text-[11px] whitespace-nowrap shrink-0 ${statusClass}`}
+                      >
+                        {cert.status || 'In Progress'}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -439,55 +523,164 @@ export const ProjectsView: React.FC = () => {
 
         {/* Certifications Section */}
         <section id="section-verified-pedigree" className="space-y-6 pt-6">
-          <div className="space-y-2">
-            <div id="certifications-terminal-command" className="flex items-center gap-2 font-mono text-xs text-[#38bdf8]">
-              <span className="text-[#34d399] select-none font-semibold">$</span>
-              <span>cat ./accreditations_in_flight.log</span>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="space-y-2">
+              <div id="certifications-terminal-command" className="flex items-center gap-2 font-mono text-xs text-[#38bdf8]">
+                <span className="text-[#34d399] select-none font-semibold">$</span>
+                <span>cat ./accreditations_in_flight.log</span>
+              </div>
+
+              <h2 id="certifications-title" className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-sans">
+                Certifications &amp; Continuous Learning
+              </h2>
             </div>
 
-            <h2 id="certifications-title" className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-sans">
-              Certifications &amp; Continuous Learning
-            </h2>
+            {/* Filter pills */}
+            <div className="flex items-center gap-1.5 bg-[#121316] p-1 rounded-lg border border-[#232428] shrink-0 font-mono text-xs">
+              <button
+                id="filter-cert-all"
+                onClick={() => setCertFilter('all')}
+                className={`px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+                  certFilter === 'all'
+                    ? 'bg-[#23242b] text-[#38bdf8] font-semibold shadow-xs'
+                    : 'text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                All (7)
+              </button>
+              <button
+                id="filter-cert-ai-data"
+                onClick={() => setCertFilter('ai-data')}
+                className={`px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+                  certFilter === 'ai-data'
+                    ? 'bg-[#23242b] text-[#38bdf8] font-semibold shadow-xs'
+                    : 'text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                AI &amp; Data (3)
+              </button>
+              <button
+                id="filter-cert-cloud-devops"
+                onClick={() => setCertFilter('cloud-devops')}
+                className={`px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+                  certFilter === 'cloud-devops'
+                    ? 'bg-[#23242b] text-[#38bdf8] font-semibold shadow-xs'
+                    : 'text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                Cloud &amp; DevOps (4)
+              </button>
+            </div>
           </div>
 
-          <div id="certifications-list" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {CERTIFICATIONS.map((cert) => {
-              const isFullWidth = cert.id === 'github-foundations';
-              const statusClass = 
-                cert.status === 'Completed'
-                  ? 'bg-[#132c21] text-[#34d399] border border-[#204c38]'
-                  : cert.status === 'In Progress'
-                  ? 'bg-[#13232c] text-[#38bdf8] border border-[#203c4c]'
-                  : 'bg-[#27282e] text-zinc-400 border border-[#35363e]';
-
-              return (
-                <div
-                  id={`card-cert-${cert.id}`}
-                  key={cert.id}
-                  className={`rounded-xl border border-[#232428] bg-[#16171a] p-5 flex flex-col justify-between shadow-lg ${
-                    isFullWidth ? 'col-span-1 md:col-span-2 lg:col-span-3' : ''
-                  }`}
-                >
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider font-semibold">
-                        {cert.issuer}
-                      </span>
-                      <span
-                        id={`cert-status-${cert.id}`}
-                        className={`px-2 py-0.5 rounded text-[10px] font-mono font-medium ${statusClass}`}
-                      >
-                        {cert.status || 'In Progress'}
-                      </span>
-                    </div>
-
-                    <div id={`cert-title-${cert.id}`} className="text-sm font-semibold font-sans text-zinc-100 pt-1">
-                      {cert.title}
-                    </div>
+          <div id="certifications-list" className="space-y-6">
+            {/* Track 1: AI & Data Engineering */}
+            {(certFilter === 'all' || certFilter === 'ai-data') && (
+              <div className="space-y-3">
+                <div className="flex items-center justify-between border-b border-[#202126] pb-2">
+                  <div className="flex items-center gap-2 font-mono text-xs text-zinc-300 uppercase tracking-wider font-medium">
+                    <Sparkles className="w-3.5 h-3.5 text-[#34d399]" />
+                    <span>AI &amp; Data Engineering</span>
                   </div>
+                  <span className="text-[11px] font-mono text-zinc-500">3 Accreditations</span>
                 </div>
-              );
-            })}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {aiAndDataCerts.map((cert) => {
+                    const statusClass = 
+                      cert.status === 'Completed'
+                        ? 'bg-[#132c21] text-[#34d399] border border-[#204c38]'
+                        : cert.status === 'In Progress'
+                        ? 'bg-[#13232c] text-[#38bdf8] border border-[#203c4c]'
+                        : 'bg-[#222329] text-zinc-400 border border-[#2f3038]';
+
+                    return (
+                      <div
+                        id={`card-cert-${cert.id}`}
+                        key={cert.id}
+                        className="rounded-xl border border-[#232428] bg-[#16171a] hover:border-[#38bdf8]/40 hover:bg-[#1a1b20] p-5 flex flex-col justify-between shadow-lg transition-all duration-200 group"
+                      >
+                        <div className="space-y-2.5">
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span className="w-6 h-6 rounded flex items-center justify-center bg-[#202127] border border-[#2d2f38] text-zinc-400 group-hover:text-[#38bdf8] transition-colors shrink-0">
+                                {getCertIcon(cert.iconType)}
+                              </span>
+                              <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider font-semibold truncate">
+                                {cert.issuer}
+                              </span>
+                            </div>
+                            <span
+                              id={`cert-status-${cert.id}`}
+                              className={`px-2 py-0.5 rounded text-[10px] font-mono font-medium shrink-0 ${statusClass}`}
+                            >
+                              {cert.status || 'In Progress'}
+                            </span>
+                          </div>
+
+                          <div id={`cert-title-${cert.id}`} className="text-sm font-semibold font-sans text-zinc-100 group-hover:text-white transition-colors pt-0.5">
+                            {cert.title}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Track 2: Cloud Platforms & DevOps */}
+            {(certFilter === 'all' || certFilter === 'cloud-devops') && (
+              <div className="space-y-3">
+                <div className="flex items-center justify-between border-b border-[#202126] pb-2">
+                  <div className="flex items-center gap-2 font-mono text-xs text-zinc-300 uppercase tracking-wider font-medium">
+                    <Cloud className="w-3.5 h-3.5 text-[#38bdf8]" />
+                    <span>Cloud Platforms &amp; DevOps</span>
+                  </div>
+                  <span className="text-[11px] font-mono text-zinc-500">4 Accreditations</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {cloudAndDevOpsCerts.map((cert) => {
+                    const statusClass = 
+                      cert.status === 'Completed'
+                        ? 'bg-[#132c21] text-[#34d399] border border-[#204c38]'
+                        : cert.status === 'In Progress'
+                        ? 'bg-[#13232c] text-[#38bdf8] border border-[#203c4c]'
+                        : 'bg-[#222329] text-zinc-400 border border-[#2f3038]';
+
+                    return (
+                      <div
+                        id={`card-cert-${cert.id}`}
+                        key={cert.id}
+                        className="rounded-xl border border-[#232428] bg-[#16171a] hover:border-[#38bdf8]/40 hover:bg-[#1a1b20] p-5 flex flex-col justify-between shadow-lg transition-all duration-200 group"
+                      >
+                        <div className="space-y-2.5">
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span className="w-6 h-6 rounded flex items-center justify-center bg-[#202127] border border-[#2d2f38] text-zinc-400 group-hover:text-[#38bdf8] transition-colors shrink-0">
+                                {getCertIcon(cert.iconType)}
+                              </span>
+                              <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider font-semibold truncate">
+                                {cert.issuer}
+                              </span>
+                            </div>
+                            <span
+                              id={`cert-status-${cert.id}`}
+                              className={`px-2 py-0.5 rounded text-[10px] font-mono font-medium shrink-0 ${statusClass}`}
+                            >
+                              {cert.status || 'In Progress'}
+                            </span>
+                          </div>
+
+                          <div id={`cert-title-${cert.id}`} className="text-sm font-semibold font-sans text-zinc-100 group-hover:text-white transition-colors pt-0.5">
+                            {cert.title}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </section>
 

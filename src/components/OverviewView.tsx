@@ -9,15 +9,17 @@ import {
   AtSign, 
   GraduationCap, 
   ArrowUpRight, 
-  ArrowRight
+  ArrowRight,
+  FileText
 } from 'lucide-react';
 import { ContactModal } from './ContactModal';
 
 interface OverviewViewProps {
   onNavigateToProjects: () => void;
+  onOpenResume?: () => void;
 }
 
-export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects }) => {
+export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects, onOpenResume }) => {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [imgError, setImgError] = useState(false);
 
@@ -68,7 +70,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
               Ryo Kitano
             </h1>
             <p className="font-mono text-[13px] leading-[20px] text-[#4cd7f6] font-medium px-2 leading-snug">
-              AI / ML Engineer <span className="text-[#bcc9cd] font-normal">|</span> Combinatorics &amp; Optimization @ UWaterloo
+              Jr AI/ML Engineer <span className="text-[#bcc9cd] font-normal">|</span> Combinatorics &amp; Optimization @ UWaterloo
             </p>
             <p className="text-xs sm:text-sm text-[#bcc9cd] leading-relaxed max-w-md font-sans px-2 pt-0.5">
               My interests span machine learning, cryptography, and mathematical optimization. I have hands-on experience developing computer vision systems, LLM-powered applications, model-routing architectures, and data-driven products. I particularly enjoy translating research ideas and mathematical concepts into tools that solve real-world problems.
@@ -111,7 +113,6 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                   <span className="text-[10px] text-[#bcc9cd] uppercase font-mono tracking-wider">Education</span>
                   <span className="text-[#e5e1e4] font-medium">University of Waterloo</span>
                   <span className="text-[12px] text-[#4cd7f6]">Bachelor of Mathematics, Honours (Co-op)</span>
-                  <span className="text-[11px] text-[#34d399] mt-0.5">★ President’s Scholarship (2025)</span>
                   <span className="text-[11px] text-[#bcc9cd] mt-1">Coursework: Optimization, Probability, Statistics, Linear Algebra II, Combinatorics, Graph Theory, Network Flow</span>
                 </div>
               </div>
@@ -158,6 +159,32 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                 <ArrowUpRight className="w-[18px] h-[18px] text-[#bcc9cd] group-hover:text-[#4edea3] transition-transform group-hover:translate-x-0.5" />
               </a>
 
+              {/* Resume.pdf */}
+              <a
+                className="flex items-center justify-between p-3 rounded-lg bg-[#201f22] hover:bg-[#2a2a2c] transition-colors text-[#e5e1e4] group cursor-pointer"
+                href="/Resume.pdf"
+                onClick={(e) => {
+                  if (onOpenResume) {
+                    e.preventDefault();
+                    onOpenResume();
+                  }
+                }}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-8 h-8 rounded flex items-center justify-center bg-[#353437] text-[#4cd7f6]">
+                    <FileText className="w-5 h-5" />
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="font-mono text-xs text-[#e5e1e4] font-medium">Resume.pdf</span>
+                    <span className="font-mono text-[10px] text-zinc-400">Preview &amp; Download</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 text-[11px] font-mono text-[#4cd7f6]">
+                  <span>Preview</span>
+                  <ArrowUpRight className="w-[18px] h-[18px] text-[#bcc9cd] group-hover:text-[#4cd7f6] transition-transform group-hover:translate-x-0.5" />
+                </div>
+              </a>
+
               {/* Direct Mail */}
               <button
                 onClick={() => setIsContactOpen(true)}
@@ -185,54 +212,8 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
         <div className="w-full py-12 sm:py-16 lg:py-24">
           <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-              {/* Left Column: Portrait & Location */}
-              <div className="lg:col-span-4 flex flex-col items-center lg:items-start">
-                <div
-                  id="profile-portrait-card"
-                  className="w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-2xl overflow-hidden bg-[#16171a] border border-[#27282d] relative shadow-2xl flex items-center justify-center"
-                >
-                  {!imgError ? (
-                    <img
-                      id="profile-portrait-image"
-                      alt="Ryo Kitano"
-                      className="w-full h-full object-cover select-none contrast-[1.02]"
-                      src="/profile.jpg"
-                      onError={() => setImgError(true)}
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center justify-center gap-3 p-6 text-center">
-                      <div className="w-20 h-20 rounded-2xl bg-[#131b24] border border-[#1e3a4f] flex items-center justify-center font-mono text-2xl font-bold text-[#4cd7f6] shadow-inner">
-                        RK
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <span className="text-sm font-semibold text-white">Ryo Kitano</span>
-                        <span className="font-mono text-[11px] text-zinc-400">AI / ML Engineer</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div
-                  id="profile-location-badge"
-                  className="mt-4 flex items-center gap-2 text-[#9ca3af] font-mono text-xs"
-                >
-                  <MapPin className="w-3.5 h-3.5 text-[#6b7280]" />
-                  <span>Waterloo, ON · Remote</span>
-                </div>
-              </div>
-
-              {/* Right Column: Text, CTAs & Social Links */}
-              <div className="lg:col-span-8 flex flex-col items-start text-left">
-                {/* Availability Badge */}
-                <div
-                  id="badge-winter-coop"
-                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#13221c] border border-[#1d3d30] mb-6 shadow-xs"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#34d399]"></span>
-                  <span className="font-mono text-xs text-[#34d399] font-medium tracking-wide">
-                    Available for Winter 2026 Co-op
-                  </span>
-                </div>
-
+              {/* Left Column: Text, CTAs & Social Links */}
+              <div className="lg:col-span-8 flex flex-col items-start text-left order-2 lg:order-1">
                 {/* Headline */}
                 <h1
                   id="profile-name"
@@ -246,7 +227,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                   id="profile-headline"
                   className="mt-3 text-lg sm:text-xl text-[#38bdf8] font-medium tracking-tight font-sans"
                 >
-                  AI / ML Engineer | Combinatorics &amp; Optimization @ UWaterloo
+                  Jr AI/ML Engineer | Combinatorics &amp; Optimization @ UWaterloo
                 </p>
 
                 {/* Bio Summary */}
@@ -257,14 +238,13 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                   My interests span machine learning, cryptography, and mathematical optimization. I have hands-on experience developing computer vision systems, LLM-powered applications, model-routing architectures, and data-driven products. I particularly enjoy translating research ideas and mathematical concepts into tools that solve real-world problems.
                 </p>
 
-                {/* Academic & Scholarship Highlight */}
+                {/* Academic Highlight */}
                 <div className="mt-4 p-3 rounded-lg bg-[#141519] border border-[#232428] text-xs font-mono max-w-2xl space-y-1.5">
-                  <div className="flex items-center justify-between text-[#38bdf8]">
+                  <div className="flex items-center text-[#38bdf8]">
                     <span className="font-semibold flex items-center gap-1.5">
                       <GraduationCap className="w-4 h-4 text-[#4cd7f6]" />
                       University of Waterloo · Bachelor of Mathematics, Honours (Co-op)
                     </span>
-                    <span className="text-[#34d399] font-medium">★ President’s Scholarship (2025)</span>
                   </div>
                   <div className="text-[11px] text-zinc-400">
                     <span className="text-zinc-500">Coursework:</span> Optimization, Probability, Statistics, Linear Algebra II, Combinatorics, Graph Theory, Network Flow Theory, Algorithm Design
@@ -282,6 +262,22 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                     <span>View Projects</span>
                   </button>
 
+                  <a
+                    id="btn-view-resume-desktop"
+                    href="/Resume.pdf"
+                    onClick={(e) => {
+                      if (onOpenResume) {
+                        e.preventDefault();
+                        onOpenResume();
+                      }
+                    }}
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#181920] text-[#e5e7eb] border border-[#2c2d36] font-mono text-xs font-medium hover:border-[#38bdf8] hover:text-[#38bdf8] transition-colors cursor-pointer"
+                    title="Preview & Download Resume.pdf"
+                  >
+                    <FileText className="w-4 h-4 text-[#38bdf8]" />
+                    <span>Resume.pdf</span>
+                  </a>
+
                   <button
                     id="btn-get-in-touch"
                     onClick={() => setIsContactOpen(true)}
@@ -298,6 +294,21 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                   className="mt-10 pt-8 w-full border-t border-[#1f2026] flex flex-col gap-3 text-xs font-mono text-[#9ca3af]"
                 >
                   <div className="flex items-center gap-6">
+                    <a
+                      id="link-resume-footer"
+                      href="/Resume.pdf"
+                      onClick={(e) => {
+                        if (onOpenResume) {
+                          e.preventDefault();
+                          onOpenResume();
+                        }
+                      }}
+                      className="hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer"
+                    >
+                      <FileText className="w-3.5 h-3.5 text-[#38bdf8]" />
+                      <span>Resume.pdf</span>
+                    </a>
+
                     <a
                       id="link-github"
                       href="https://github.com/Ryo0326-hub"
@@ -333,6 +344,41 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                   <div className="text-[#6b7280] text-xs">
                     UWaterloo Math '29 · Combinatorics &amp; Optimization
                   </div>
+                </div>
+              </div>
+
+              {/* Right Column: Portrait & Location */}
+              <div className="lg:col-span-4 flex flex-col items-center lg:items-end order-1 lg:order-2">
+                <div
+                  id="profile-portrait-card"
+                  className="w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-2xl overflow-hidden bg-[#16171a] border border-[#27282d] relative shadow-2xl flex items-center justify-center"
+                >
+                  {!imgError ? (
+                    <img
+                      id="profile-portrait-image"
+                      alt="Ryo Kitano"
+                      className="w-full h-full object-cover select-none contrast-[1.02]"
+                      src="/profile.jpg"
+                      onError={() => setImgError(true)}
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center gap-3 p-6 text-center">
+                      <div className="w-20 h-20 rounded-2xl bg-[#131b24] border border-[#1e3a4f] flex items-center justify-center font-mono text-2xl font-bold text-[#4cd7f6] shadow-inner">
+                        RK
+                      </div>
+                      <div className="flex flex-col items-center gap-1">
+                        <span className="text-sm font-semibold text-white">Ryo Kitano</span>
+                        <span className="font-mono text-[11px] text-zinc-400">Jr AI/ML Engineer</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div
+                  id="profile-location-badge"
+                  className="mt-4 flex items-center gap-2 text-[#9ca3af] font-mono text-xs"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-[#6b7280]" />
+                  <span>Waterloo, ON · Remote</span>
                 </div>
               </div>
             </div>
