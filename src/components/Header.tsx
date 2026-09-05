@@ -171,12 +171,18 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
 
           {/* Profile thumbnail - shown on Experience, Projects, Certifications tabs */}
           {currentTab !== 'overview' && (
-            <img
-              id="header-profile-avatar"
-              alt="Ryo Kitano avatar"
-              className="w-8 h-8 rounded-full object-cover border border-[#2d2e35]"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqe9l2iwkqAEJcSr9YDNmnXOIVnVt5Grc_JM7E9ZvG___Vb_woQyBhAGEBPpL3GGjleA3GNcyg1-xXmibRm_TRonwEy1IgVW-NKdgtbi9TNDj0U_GnNTpqyslC5FTfFDfkqEj2KFvGryVnQ4ap4JhfEA7vUhb0pXNjg84xryyOl1SptsVIp5QDUhQt95nwnD7oagMgPGeABWcSabU5aC5wD42oZtBSQKUT_wO8-q24sMp8lr0pNXv4-g"
-            />
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#2d2e35] bg-[#16171b] flex items-center justify-center shrink-0">
+              <img
+                id="header-profile-avatar"
+                alt="Ryo Kitano avatar"
+                className="w-full h-full object-cover"
+                src="/profile.jpg"
+                onError={(e) => {
+                  (e.target as HTMLElement).style.display = 'none';
+                }}
+              />
+              <span className="font-mono text-[11px] font-bold text-[#4cd7f6]">RK</span>
+            </div>
           )}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { 
   ArrowDown, 
   Mail, 
@@ -9,9 +9,7 @@ import {
   AtSign, 
   GraduationCap, 
   ArrowUpRight, 
-  ArrowRight,
-  Camera,
-  UploadCloud
+  ArrowRight
 } from 'lucide-react';
 import { ContactModal } from './ContactModal';
 
@@ -19,90 +17,39 @@ interface OverviewViewProps {
   onNavigateToProjects: () => void;
 }
 
-const DEFAULT_AVATAR = "https://lh3.googleusercontent.com/aida/AEtjO1Vsr-0z_KkI9j4j5myMcKNyx-j3dx-_aM-_C1z18NorwPH3Vy4-sjLl2ujHh57RuHY5VyBdBHpj8WxrEL6_ll5HoPyctToDNjbL9_-L-Fx-a592WRfaqZvuO-5A9KWz8I43HCpUUGnMa85_8BDZwjFaIrJ2MTs11Qj_VDudYQOrNol7547_mX-UsH6pLAFM9GH51i8JIrhxbjt3se4dghtWZEq4qEwAlG11dOTSmoVBHfkLAOE6VYW6GuGU";
-
 export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects }) => {
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [avatar, setAvatar] = useState<string>(() => {
-    return localStorage.getItem('ryo_custom_avatar') || '/avatar.jpg';
-  });
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleFile = (file: File) => {
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const res = event.target?.result as string;
-        if (res) {
-          setAvatar(res);
-          try {
-            localStorage.setItem('ryo_custom_avatar', res);
-          } catch (err) {
-            console.warn('Could not save avatar to localStorage', err);
-          }
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) handleFile(file);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files?.[0];
-    if (file) handleFile(file);
-  };
+  const [imgError, setImgError] = useState(false);
 
   return (
     <div id="overview-screen" className="w-full flex-1 flex flex-col justify-center">
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*"
-        className="hidden"
-        onChange={handleFileInputChange}
-      />
 
       {/* ========================================================================= */}
-      {/* MOBILE OVERVIEW (md:hidden) - Exact implementation as provided */}
+      {/* MOBILE OVERVIEW (md:hidden) */}
       {/* ========================================================================= */}
       <div className="md:hidden flex flex-col relative w-full pt-4 pb-28 bg-[#131315] min-h-[calc(100vh-4rem)]">
         <div className="flex flex-col w-full px-4 py-2 gap-6">
           {/* Profile Card Presentation */}
           <div className="flex flex-col items-center w-full">
-            <div 
-              className="relative group p-1.5 rounded-xl bg-[#1c1b1d] shadow-xl cursor-pointer"
-              onClick={() => fileInputRef.current?.click()}
-              onDrop={handleDrop}
-              onDragOver={(e) => e.preventDefault()}
-            >
-              <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-lg overflow-hidden bg-[#353437] relative">
-                <img
-                  alt="Ryo Kitano"
-                  className="w-full h-full object-cover object-center grayscale-[10%] contrast-[1.05] transition-all duration-300 group-hover:grayscale-0 group-hover:scale-105"
-                  src={avatar}
-                  onError={() => {
-                    if (avatar !== DEFAULT_AVATAR) {
-                      setAvatar(DEFAULT_AVATAR);
-                    }
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e10]/80 via-transparent to-transparent pointer-events-none"></div>
-
-                {/* Subtle Hover / Tap overlay for updating photo */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 backdrop-blur-[2px]">
-                  <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white shadow-sm">
-                    <Camera className="w-4 h-4" />
+            <div className="relative p-1.5 rounded-xl bg-[#1c1b1d] shadow-xl">
+              <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-lg overflow-hidden bg-[#1a1b20] border border-[#27282e] relative flex items-center justify-center">
+                {!imgError ? (
+                  <img
+                    alt="Ryo Kitano"
+                    className="w-full h-full object-cover object-center contrast-[1.02]"
+                    src="/profile.jpg"
+                    onError={() => setImgError(true)}
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center gap-2 p-4 text-center">
+                    <div className="w-16 h-16 rounded-2xl bg-[#131b24] border border-[#1e3a4f] flex items-center justify-center font-mono text-xl font-bold text-[#4cd7f6]">
+                      RK
+                    </div>
+                    <span className="font-mono text-xs text-zinc-400 font-medium">Ryo Kitano</span>
                   </div>
-                  <span className="font-mono text-[10px] text-white font-medium bg-black/60 px-2 py-0.5 rounded">
-                    Tap to change photo
-                  </span>
-                </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e10]/80 via-transparent to-transparent pointer-events-none"></div>
 
                 <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[#bcc9cd] font-mono text-[11px] px-2 py-1 rounded bg-[#0e0e10]/85 backdrop-blur-sm pointer-events-none">
                   <span className="flex items-center gap-1">
@@ -242,31 +189,27 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
               <div className="lg:col-span-4 flex flex-col items-center lg:items-start">
                 <div
                   id="profile-portrait-card"
-                  onClick={() => fileInputRef.current?.click()}
-                  onDrop={handleDrop}
-                  onDragOver={(e) => e.preventDefault()}
-                  className="group w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-2xl overflow-hidden bg-[#16171a] border border-[#27282d] hover:border-[#35363e] relative shadow-2xl cursor-pointer transition-colors"
+                  className="w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-2xl overflow-hidden bg-[#16171a] border border-[#27282d] relative shadow-2xl flex items-center justify-center"
                 >
-                  <img
-                    id="profile-portrait-image"
-                    alt="Ryo Kitano"
-                    className="w-full h-full object-cover select-none transition-transform duration-300 group-hover:scale-105"
-                    src={avatar}
-                    onError={() => {
-                      if (avatar !== DEFAULT_AVATAR) {
-                        setAvatar(DEFAULT_AVATAR);
-                      }
-                    }}
-                  />
-                  {/* Subtle Hover overlay for updating photo */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 backdrop-blur-[2px]">
-                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white shadow-md">
-                      <Camera className="w-5 h-5" />
+                  {!imgError ? (
+                    <img
+                      id="profile-portrait-image"
+                      alt="Ryo Kitano"
+                      className="w-full h-full object-cover select-none contrast-[1.02]"
+                      src="/profile.jpg"
+                      onError={() => setImgError(true)}
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center gap-3 p-6 text-center">
+                      <div className="w-20 h-20 rounded-2xl bg-[#131b24] border border-[#1e3a4f] flex items-center justify-center font-mono text-2xl font-bold text-[#4cd7f6] shadow-inner">
+                        RK
+                      </div>
+                      <div className="flex flex-col items-center gap-1">
+                        <span className="text-sm font-semibold text-white">Ryo Kitano</span>
+                        <span className="font-mono text-[11px] text-zinc-400">AI / ML Engineer</span>
+                      </div>
                     </div>
-                    <span className="font-mono text-xs text-white font-medium bg-black/60 px-2.5 py-1 rounded-md">
-                      Click or drop to change photo
-                    </span>
-                  </div>
+                  )}
                 </div>
                 <div
                   id="profile-location-badge"

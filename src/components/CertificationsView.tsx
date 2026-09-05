@@ -61,9 +61,6 @@ export const CertificationsView: React.FC = () => {
           >
             Certifications &amp; Continuous Learning
           </h1>
-          <p className="mt-2 text-sm sm:text-base text-[#bcc9cd] font-sans">
-            Formal specializations, cloud credentials, and technical accreditations in Machine Learning, Deep Learning, and Distributed Cloud Systems.
-          </p>
         </div>
 
         {/* Certifications Grid */}
