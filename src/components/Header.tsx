@@ -156,7 +156,7 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
               <img
                 id="header-profile-avatar"
                 alt="Ryo Kitano avatar"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-[center_20%]"
                 src="/profile.jpg"
                 onError={(e) => {
                   (e.target as HTMLElement).style.display = 'none';

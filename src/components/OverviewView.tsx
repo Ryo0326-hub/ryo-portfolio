@@ -35,11 +35,11 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
           {/* Profile Card Presentation */}
           <div className="flex flex-col items-center w-full">
             <div className="relative p-1.5 rounded-xl bg-[#1c1b1d] shadow-xl">
-              <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-lg overflow-hidden bg-[#1a1b20] border border-[#27282e] relative flex items-center justify-center">
+              <div className="w-40 sm:w-44 aspect-[3/4] rounded-xl overflow-hidden bg-[#1a1b20] border border-[#27282e] relative flex items-center justify-center shadow-lg">
                 {!imgError ? (
                   <img
                     alt="Ryo Kitano"
-                    className="w-full h-full object-cover object-center contrast-[1.02]"
+                    className="w-full h-full object-cover object-[center_20%] contrast-[1.02]"
                     src="/profile.jpg"
                     onError={() => setImgError(true)}
                   />
@@ -351,13 +351,13 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
               <div className="lg:col-span-4 flex flex-col items-center lg:items-end order-1 lg:order-2">
                 <div
                   id="profile-portrait-card"
-                  className="w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-2xl overflow-hidden bg-[#16171a] border border-[#27282d] relative shadow-2xl flex items-center justify-center"
+                  className="w-full max-w-[240px] sm:max-w-[260px] aspect-[3/4] rounded-2xl overflow-hidden bg-[#16171a] border border-[#27282d] relative shadow-xl flex items-center justify-center transition-all duration-300 hover:border-[#38bdf8]/40"
                 >
                   {!imgError ? (
                     <img
                       id="profile-portrait-image"
                       alt="Ryo Kitano"
-                      className="w-full h-full object-cover select-none contrast-[1.02]"
+                      className="w-full h-full object-cover object-[center_20%] select-none contrast-[1.02]"
                       src="/profile.jpg"
                       onError={() => setImgError(true)}
                     />
