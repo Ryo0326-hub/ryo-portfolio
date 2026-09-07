@@ -20,7 +20,7 @@ interface ResumeModalProps {
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
-  const [viewMode, setViewMode] = useState<'document' | 'embed'>('document');
+  const [viewMode, setViewMode] = useState<'document' | 'embed'>('embed');
   const [zoomLevel, setZoomLevel] = useState<number>(100);
   const [copied, setCopied] = useState(false);
 
@@ -40,7 +40,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
   }, [isOpen, onClose]);
 
   const handleCopyLink = () => {
-    const url = `${window.location.origin}/Resume.pdf`;
+    const url = `${window.location.origin}/Ryo_Kitano_AI_ML_Resume.pdf`;
     navigator.clipboard.writeText(url).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -170,7 +170,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
               {/* Open in New Tab */}
               <a
-                href="/Resume.pdf"
+                href="/Ryo_Kitano_AI_ML_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-mono rounded-lg bg-[#1c1d24] border border-[#2c2d36] text-zinc-300 hover:text-white hover:border-zinc-500 transition-colors"
@@ -182,10 +182,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
               {/* Download PDF */}
               <a
-                href="/Resume.pdf"
-                download="Ryo_Kitano_Resume.pdf"
+                href="/Ryo_Kitano_AI_ML_Resume.pdf"
+                download="Ryo_Kitano_AI_ML_Resume.pdf"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium rounded-lg bg-[#00c5e0] text-[#003640] hover:bg-[#34e2fb] transition-colors shadow-xs"
-                title="Download Resume.pdf"
+                title="Download Ryo_Kitano_AI_ML_Resume.pdf"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Download</span>
@@ -205,36 +205,12 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           {/* Main Preview Container */}
           <div className="flex-1 w-full overflow-auto bg-[#0a0a0c] p-3 sm:p-6 flex justify-center">
             {viewMode === 'embed' ? (
-              <div className="w-full h-full min-h-[500px] rounded-lg overflow-hidden bg-white border border-[#27282e]">
-                <object
-                  data="/Resume.pdf"
-                  type="application/pdf"
-                  className="w-full h-full min-h-[600px]"
-                >
-                  <div className="flex flex-col items-center justify-center h-full p-8 text-center text-zinc-700">
-                    <FileText className="w-12 h-12 text-zinc-400 mb-3" />
-                    <p className="text-sm font-semibold mb-2">PDF Viewer couldn&apos;t load directly in this iframe</p>
-                    <p className="text-xs text-zinc-500 mb-4 max-w-sm">
-                      You can switch back to the high-fidelity interactive preview or open the PDF directly in a new tab.
-                    </p>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => setViewMode('document')}
-                        className="px-3 py-1.5 rounded-md bg-[#111215] text-[#38bdf8] text-xs font-mono font-medium"
-                      >
-                        Switch to Interactive Preview
-                      </button>
-                      <a
-                        href="/Resume.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-3 py-1.5 rounded-md bg-[#00c5e0] text-[#003640] text-xs font-mono font-semibold"
-                      >
-                        Open /Resume.pdf
-                      </a>
-                    </div>
-                  </div>
-                </object>
+              <div className="w-full h-full min-h-[500px] rounded-lg overflow-hidden bg-[#16171b] border border-[#27282e] flex flex-col">
+                <iframe
+                  src="/Ryo_Kitano_AI_ML_Resume.pdf#toolbar=1"
+                  title="Ryo Kitano Resume"
+                  className="w-full flex-1 min-h-[600px] border-0 bg-white"
+                />
               </div>
             ) : (
               /* High-Fidelity Document Preview (Paper Layout) */

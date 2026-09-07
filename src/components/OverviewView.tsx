@@ -13,6 +13,7 @@ import {
   FileText
 } from 'lucide-react';
 import { ContactModal } from './ContactModal';
+import { PROFILE_INFO } from '../data/portfolioData';
 
 interface OverviewViewProps {
   onNavigateToProjects: () => void;
@@ -21,7 +22,16 @@ interface OverviewViewProps {
 
 export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects, onOpenResume }) => {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [imgSrc, setImgSrc] = useState(PROFILE_INFO.profileImage);
   const [imgError, setImgError] = useState(false);
+
+  const handleImageError = () => {
+    if (imgSrc !== PROFILE_INFO.profileImageFallback) {
+      setImgSrc(PROFILE_INFO.profileImageFallback);
+    } else {
+      setImgError(true);
+    }
+  };
 
   return (
     <div id="overview-screen" className="w-full flex-1 flex flex-col justify-center">
@@ -34,14 +44,14 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
         <div className="flex flex-col w-full px-4 py-2 gap-6">
           {/* Profile Card Presentation */}
           <div className="flex flex-col items-center w-full">
-            <div className="relative p-1.5 rounded-xl bg-[#1c1b1d] shadow-xl">
-              <div className="w-40 sm:w-44 aspect-[3/4] rounded-xl overflow-hidden bg-[#1a1b20] border border-[#27282e] relative flex items-center justify-center shadow-lg">
+            <div className="relative p-1.5 rounded-2xl bg-[#1c1b1d] shadow-xl">
+              <div className="w-44 h-56 sm:w-48 sm:h-64 aspect-[3/4] rounded-xl overflow-hidden bg-[#1a1b20] border border-[#27282e] relative flex items-center justify-center shadow-lg">
                 {!imgError ? (
                   <img
                     alt="Ryo Kitano"
                     className="w-full h-full object-cover object-[center_20%] contrast-[1.02]"
-                    src="/profile.jpg"
-                    onError={() => setImgError(true)}
+                    src={imgSrc}
+                    onError={handleImageError}
                   />
                 ) : (
                   <div className="flex flex-col items-center justify-center gap-2 p-4 text-center">
@@ -53,12 +63,15 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e10]/80 via-transparent to-transparent pointer-events-none"></div>
 
-                <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[#bcc9cd] font-mono text-[11px] px-2 py-1 rounded bg-[#0e0e10]/85 backdrop-blur-sm pointer-events-none">
+                <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[#bcc9cd] font-mono text-[11px] px-2 py-1 rounded bg-[#0e0e10]/85 backdrop-blur-sm pointer-events-none border border-white/5">
                   <span className="flex items-center gap-1">
                     <MapPin className="w-3.5 h-3.5 text-[#4cd7f6]" />
                     Waterloo, ON
                   </span>
-                  <span className="text-[#4edea3] font-medium">Remote OK</span>
+                  <span className="text-[#4edea3] font-medium flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#4edea3] animate-pulse"></span>
+                    Remote OK
+                  </span>
                 </div>
               </div>
             </div>
@@ -162,7 +175,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
               {/* Resume.pdf */}
               <a
                 className="flex items-center justify-between p-3 rounded-lg bg-[#201f22] hover:bg-[#2a2a2c] transition-colors text-[#e5e1e4] group cursor-pointer"
-                href="/Resume.pdf"
+                href={PROFILE_INFO.resumeUrl}
                 onClick={(e) => {
                   if (onOpenResume) {
                     e.preventDefault();
@@ -264,7 +277,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
 
                   <a
                     id="btn-view-resume-desktop"
-                    href="/Resume.pdf"
+                    href={PROFILE_INFO.resumeUrl}
                     onClick={(e) => {
                       if (onOpenResume) {
                         e.preventDefault();
@@ -296,7 +309,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                   <div className="flex items-center gap-6">
                     <a
                       id="link-resume-footer"
-                      href="/Resume.pdf"
+                      href={PROFILE_INFO.resumeUrl}
                       onClick={(e) => {
                         if (onOpenResume) {
                           e.preventDefault();
@@ -351,16 +364,29 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
               <div className="lg:col-span-4 flex flex-col items-center lg:items-end order-1 lg:order-2">
                 <div
                   id="profile-portrait-card"
-                  className="w-full max-w-[240px] sm:max-w-[260px] aspect-[3/4] rounded-2xl overflow-hidden bg-[#16171a] border border-[#27282d] relative shadow-xl flex items-center justify-center transition-all duration-300 hover:border-[#38bdf8]/40"
+                  className="group w-full max-w-[240px] sm:max-w-[260px] aspect-[3/4] rounded-2xl overflow-hidden bg-[#16171a] border border-[#27282d] relative shadow-2xl flex items-center justify-center transition-all duration-300 hover:border-[#38bdf8]/50 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.2)]"
                 >
                   {!imgError ? (
-                    <img
-                      id="profile-portrait-image"
-                      alt="Ryo Kitano"
-                      className="w-full h-full object-cover object-[center_20%] select-none contrast-[1.02]"
-                      src="/profile.jpg"
-                      onError={() => setImgError(true)}
-                    />
+                    <>
+                      <img
+                        id="profile-portrait-image"
+                        alt="Ryo Kitano"
+                        className="w-full h-full object-cover object-[center_20%] select-none contrast-[1.02] transition-transform duration-500 group-hover:scale-[1.02]"
+                        src={imgSrc}
+                        onError={handleImageError}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e11]/85 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[#0e0e11]/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-zinc-300 pointer-events-none">
+                        <span className="flex items-center gap-1.5 text-zinc-300">
+                          <MapPin className="w-3.5 h-3.5 text-[#4cd7f6]" />
+                          Waterloo, ON
+                        </span>
+                        <span className="flex items-center gap-1.5 text-[#4edea3] font-medium">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#4edea3] animate-pulse"></span>
+                          Remote OK
+                        </span>
+                      </div>
+                    </>
                   ) : (
                     <div className="flex flex-col items-center justify-center gap-3 p-6 text-center">
                       <div className="w-20 h-20 rounded-2xl bg-[#131b24] border border-[#1e3a4f] flex items-center justify-center font-mono text-2xl font-bold text-[#4cd7f6] shadow-inner">
@@ -375,10 +401,10 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                 </div>
                 <div
                   id="profile-location-badge"
-                  className="mt-4 flex items-center gap-2 text-[#9ca3af] font-mono text-xs"
+                  className="mt-3.5 flex items-center gap-2 text-[#9ca3af] font-mono text-xs"
                 >
-                  <MapPin className="w-3.5 h-3.5 text-[#6b7280]" />
-                  <span>Waterloo, ON · Remote</span>
+                  <GraduationCap className="w-3.5 h-3.5 text-[#4cd7f6]" />
+                  <span>Mathematics @ UWaterloo</span>
                 </div>
               </div>
             </div>

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TabType } from '../types';
 import { FileText, Mail } from 'lucide-react';
+import { PROFILE_INFO } from '../data/portfolioData';
 
 interface HeaderProps {
   currentTab: TabType;
@@ -10,6 +11,8 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenContact, onOpenResume }) => {
+  const [avatarSrc, setAvatarSrc] = useState(PROFILE_INFO.profileImage);
+  const [avatarError, setAvatarError] = useState(false);
   return (
     <header id="app-header" className="sticky top-0 z-50 w-full bg-[#0c0d10]/95 backdrop-blur-xl border-b border-[#202126]">
       {/* Mobile Top Header */}
@@ -29,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
           {/* Mobile Resume Link */}
           <a
             id="mobile-header-resume-btn"
-            href="/Resume.pdf"
+            href={PROFILE_INFO.resumeUrl}
             onClick={(e) => {
               if (onOpenResume) {
                 e.preventDefault();
@@ -132,7 +135,7 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
           {/* Resume button */}
           <a
             id="header-resume-link"
-            href="/Resume.pdf"
+            href={PROFILE_INFO.resumeUrl}
             onClick={(e) => {
               if (onOpenResume) {
                 e.preventDefault();
@@ -152,17 +155,24 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
 
           {/* Profile thumbnail - shown on Experience, Projects, Certifications tabs */}
           {currentTab !== 'overview' && (
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#2d2e35] bg-[#16171b] flex items-center justify-center shrink-0">
-              <img
-                id="header-profile-avatar"
-                alt="Ryo Kitano avatar"
-                className="w-full h-full object-cover object-[center_20%]"
-                src="/profile.jpg"
-                onError={(e) => {
-                  (e.target as HTMLElement).style.display = 'none';
-                }}
-              />
-              <span className="font-mono text-[11px] font-bold text-[#4cd7f6]">RK</span>
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#2d2e35] ring-1 ring-white/5 bg-[#16171b] flex items-center justify-center shrink-0 shadow-sm">
+              {!avatarError ? (
+                <img
+                  id="header-profile-avatar"
+                  alt="Ryo Kitano avatar"
+                  className="w-full h-full object-cover object-[center_20%]"
+                  src={avatarSrc}
+                  onError={() => {
+                    if (avatarSrc !== PROFILE_INFO.profileImageFallback) {
+                      setAvatarSrc(PROFILE_INFO.profileImageFallback);
+                    } else {
+                      setAvatarError(true);
+                    }
+                  }}
+                />
+              ) : (
+                <span className="font-mono text-[11px] font-bold text-[#4cd7f6]">RK</span>
+              )}
             </div>
           )}
         </div>

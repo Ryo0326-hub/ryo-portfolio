@@ -3,6 +3,10 @@ import { Project, ExperienceItem, CertificationItem } from '../types';
 export const PROFILE_INFO = {
   name: 'Ryo Kitano',
   handle: 'ryo.kitano',
+  profileImage: '/profile2.jpg',
+  profileImageFallback: '/profile.jpg',
+  resumeUrl: '/Ryo_Kitano_AI_ML_Resume.pdf',
+  resumeFilename: 'Ryo_Kitano_AI_ML_Resume.pdf',
   title: 'Jr AI/ML Engineer | Mathematics @ University of Waterloo',
   bio: 'My interests span machine learning, cryptography, and mathematical optimization. I have hands-on experience developing computer vision systems, LLM-powered applications, model-routing architectures, and data-driven products. I particularly enjoy translating research ideas and mathematical concepts into tools that solve real-world problems.',
   status: 'AVAILABLE FOR WINTER 2026 CO-OP',
