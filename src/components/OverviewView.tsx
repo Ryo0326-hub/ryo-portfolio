@@ -223,8 +223,8 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
       {/* ========================================================================= */}
       <div className="hidden md:flex w-full flex-1 flex-col justify-center bg-[#0c0d10]">
         <div className="w-full py-12 sm:py-16 lg:py-24">
-          <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="max-w-[1040px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               {/* Left Column: Text, CTAs & Social Links */}
               <div className="lg:col-span-8 flex flex-col items-start text-left order-2 lg:order-1">
                 {/* Headline */}
@@ -361,7 +361,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
               </div>
 
               {/* Right Column: Portrait & Location */}
-              <div className="lg:col-span-4 flex flex-col items-center lg:items-end order-1 lg:order-2">
+              <div className="lg:col-span-4 flex flex-col items-center lg:items-start lg:pl-3 xl:pl-5 order-1 lg:order-2">
                 <div
                   id="profile-portrait-card"
                   className="group w-full max-w-[240px] sm:max-w-[260px] aspect-[3/4] rounded-2xl overflow-hidden bg-[#16171a] border border-[#27282d] relative shadow-2xl flex items-center justify-center transition-all duration-300 hover:border-[#38bdf8]/50 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.2)]"
@@ -401,7 +401,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                 </div>
                 <div
                   id="profile-location-badge"
-                  className="mt-3.5 flex items-center gap-2 text-[#9ca3af] font-mono text-xs"
+                  className="mt-3.5 flex items-center justify-center w-full max-w-[240px] sm:max-w-[260px] gap-2 text-[#9ca3af] font-mono text-xs"
                 >
                   <GraduationCap className="w-3.5 h-3.5 text-[#4cd7f6]" />
                   <span>Mathematics @ UWaterloo</span>
