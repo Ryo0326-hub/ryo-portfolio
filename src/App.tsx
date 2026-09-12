@@ -25,16 +25,57 @@ export default function App() {
   }, [currentTab]);
 
   return (
-    <div className="min-h-screen bg-[#131315] text-[#e5e1e4] flex flex-col items-center selection:bg-[#4cd7f6]/20 selection:text-[#4cd7f6]">
+    <div className="min-h-screen bg-[#060f19] text-[#e5e1e4] flex flex-col items-center selection:bg-[#4cd7f6]/20 selection:text-[#4cd7f6]">
       {/* Contact modal accessible globally */}
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
 
       {/* Resume modal with preview & download */}
       <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
 
-      {/* Background technical grid texture */}
+      {/* Ambient ASCII Art Background (Basketball court blueprint: desktop & mobile variants) */}
       <div 
-        className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
+        id="ascii-background-layer"
+        className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none bg-[#060f19]"
+        aria-hidden="true"
+      >
+        {/* Desktop ASCII Court Blueprint */}
+        <img
+          src="/bg5-desk.png"
+          alt="Basketball court ASCII art blueprint desktop"
+          className="hidden md:block w-full h-full object-cover object-center opacity-95 transition-opacity duration-300"
+          onError={(e) => {
+            const img = e.currentTarget;
+            if (!img.src.includes('background4-desk.png')) {
+              img.src = '/background4-desk.png';
+            }
+          }}
+        />
+
+        {/* Mobile ASCII Court Blueprint */}
+        <img
+          src="/bg5-mob.png"
+          alt="Basketball court ASCII art blueprint mobile"
+          className="block md:hidden w-full h-full object-cover object-center opacity-95 transition-opacity duration-300"
+          onError={(e) => {
+            const img = e.currentTarget;
+            if (!img.src.includes('background4-mob.png')) {
+              img.src = '/background4-mob.png';
+            }
+          }}
+        />
+
+        {/* Subtle vignette framing to keep foreground cards comfortable to read while court lines shine */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse at center, transparent 60%, rgba(6, 15, 25, 0.45) 100%)'
+          }}
+        />
+      </div>
+
+      {/* Subtle technical dot texture for layered depth */}
+      <div 
+        className="fixed inset-0 pointer-events-none opacity-[0.025] z-0"
         style={{
           backgroundImage: `radial-gradient(#ffffff 1px, transparent 1px)`,
           backgroundSize: '24px 24px'

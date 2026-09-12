@@ -19,11 +19,11 @@ function renderFormattedBullet(text: string) {
 
 export const ExperienceView: React.FC = () => {
   return (
-    <div id="experience-screen" className="w-full bg-[#0c0d10] min-h-screen">
+    <div id="experience-screen" className="w-full bg-transparent min-h-screen">
       {/* ========================================================================= */}
       {/* MOBILE EXPERIENCE VIEW (md:hidden) - Exact implementation as provided */}
       {/* ========================================================================= */}
-      <div className="md:hidden flex flex-col w-full pt-4 pb-28 bg-[#131315]">
+      <div className="md:hidden flex flex-col w-full pt-4 pb-28 bg-transparent">
         {/* Mobile Header */}
         <div className="px-4 pt-2 pb-6 flex flex-col gap-1">
           <div className="flex items-center gap-2 mb-1 font-mono text-[11px] text-[#4cd7f6] tracking-widest">

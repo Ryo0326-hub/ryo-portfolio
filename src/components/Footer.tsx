@@ -61,6 +61,37 @@ export const Footer: React.FC = () => {
           © 2026 Ryo Kitano. All systems nominal.
         </div>
       </div>
+
+      {/* Background ASCII Art Citation */}
+      <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 mt-6 pt-5 border-t border-[#222328]/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#71717a] font-mono">
+        <div className="flex items-center gap-2 text-center sm:text-left">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#38bdf8] shrink-0"></span>
+          <span>
+            Background ASCII art: Photo by{' '}
+            <a
+              href="https://unsplash.com/@firedorange717?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-300 hover:text-[#38bdf8] underline decoration-zinc-600 transition-colors"
+            >
+              Joshua Kantarges
+            </a>{' '}
+            on{' '}
+            <a
+              href="https://unsplash.com/photos/basketball-court-markings-with-shadows-N_7Kb4hpaoU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-300 hover:text-[#38bdf8] underline decoration-zinc-600 transition-colors"
+            >
+              Unsplash
+            </a>{' '}
+            (edited into ASCII form by me)
+          </span>
+        </div>
+        <div className="text-[#52525b] text-[10px] uppercase tracking-wider">
+          Basketball court markings with shadows
+        </div>
+      </div>
     </footer>
   );
 };

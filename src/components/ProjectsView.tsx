@@ -124,7 +124,7 @@ export const ProjectsView: React.FC = () => {
     : mobileProjects.filter((p) => p.category === mobileCategory);
 
   return (
-    <div id="projects-screen" className="w-full bg-[#0c0d10] min-h-screen">
+    <div id="projects-screen" className="w-full bg-transparent min-h-screen">
       <ProjectDetailModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
@@ -135,7 +135,7 @@ export const ProjectsView: React.FC = () => {
       {/* ========================================================================= */}
       {/* MOBILE PROJECTS VIEW (md:hidden) - Exact implementation as provided */}
       {/* ========================================================================= */}
-      <div className="md:hidden flex flex-col w-full px-4 pt-4 pb-28 space-y-8 bg-[#131315]">
+      <div className="md:hidden flex flex-col w-full px-4 pt-4 pb-28 space-y-8 bg-transparent">
         {/* Section 1: Featured Projects */}
         <section className="flex flex-col space-y-4">
           <div className="flex flex-col space-y-1">

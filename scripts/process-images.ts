@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 
-export function processProfileImages() {
+export async function processProfileImages() {
   const publicDir = path.resolve(process.cwd(), 'public');
   const rootDir = process.cwd();
 
@@ -40,6 +40,53 @@ export function processProfileImages() {
     if (fs.existsSync(fallbackJpg)) {
       console.log(`[HEIC Processor] No profile2.HEIC found yet; initializing ${targetJpg} from ${fallbackJpg}`);
       fs.copyFileSync(fallbackJpg, targetJpg);
+    }
+  }
+
+  // Ensure true ASCII art basketball court backgrounds exist (bg5-desk.png, bg5-mob.png)
+  const deskBg = path.join(publicDir, 'bg5-desk.png');
+  const mobBg = path.join(publicDir, 'bg5-mob.png');
+  if (!fs.existsSync(deskBg) || !fs.existsSync(mobBg)) {
+    try {
+      execSync('npx tsx scripts/generate-ascii-court.ts', { stdio: 'inherit' });
+    } catch (e) {
+      console.error('[Image Processor] Failed to generate ASCII backgrounds:', e);
+    }
+  }
+
+  // Ensure zoomed-out horizontal profile image is generated for mobile overview
+  const horizontalJpg = path.join(publicDir, 'profile-horizontal.jpg');
+  const origJpg = path.join(publicDir, 'profile2-original.jpg');
+  if (!fs.existsSync(horizontalJpg) || fs.statSync(horizontalJpg).size < 100000) {
+    try {
+      const sharp = (await import('sharp')).default;
+      const srcJpg = fs.existsSync(origJpg)
+        ? origJpg
+        : fs.existsSync(targetJpg)
+        ? targetJpg
+        : path.join(publicDir, 'profile.jpg');
+
+      const meta = await sharp(srcJpg).metadata();
+      const w = meta.width || 4284;
+      const h = meta.height || 5712;
+
+      // Extract horizontal region (top: 1520 positions hair at top margin, showing full face and upper body/chest)
+      const topOffset = Math.round(h * 0.266); // ~1520px
+      const cropH = Math.min(h - topOffset, Math.round(w * 0.688)); // ~2950px
+
+      await sharp(srcJpg)
+        .extract({
+          left: 0,
+          top: topOffset,
+          width: w,
+          height: cropH,
+        })
+        .resize(1600, 1102)
+        .jpeg({ quality: 95 })
+        .toFile(horizontalJpg);
+      console.log('[Image Processor] Successfully generated high quality profile-horizontal.jpg');
+    } catch (e) {
+      console.error('[Image Processor] Could not generate profile-horizontal.jpg:', e);
     }
   }
 }

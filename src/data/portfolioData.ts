@@ -4,6 +4,7 @@ export const PROFILE_INFO = {
   name: 'Ryo Kitano',
   handle: 'ryo.kitano',
   profileImage: '/profile2.jpg',
+  profileImageHorizontal: '/profile-horizontal.jpg',
   profileImageFallback: '/profile.jpg',
   resumeUrl: '/Ryo_Kitano_AI_ML_Resume.pdf',
   resumeFilename: 'Ryo_Kitano_AI_ML_Resume.pdf',
