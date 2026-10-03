@@ -128,9 +128,9 @@ export const EXPERIENCES: ExperienceItem[] = [
     company: 'Neural Point Analytica (NPA)',
     location: 'Remote / Japan',
     workMode: 'Remote',
-    description: 'Co-founded a 3-person software company and lead full-stack engineering for an NDA-protected enterprise workflow platform, securing its first US$1.5K/month recurring client contract.',
+    description: 'Co-founded a 3-person software company and lead full-stack engineering for an NDA-protected enterprise workflow platform.',
     bullets: [
-      'Co-founded a 3-person software company and lead engineering for an NDA-protected enterprise workflow platform; secured its first recurring client contract worth **US$1.5K/month**.',
+      'Co-founded a 3-person software company and lead engineering for an NDA-protected enterprise workflow platform.',
       'Lead architecture and delivery of auditable RFQ intake, quotation, reconciliation, and reporting workflows using **Next.js**, **TypeScript**, **PostgreSQL**, and **AWS**; turn client feedback into staged releases with **Docker** and **GitHub Actions**.'
     ],
     tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'AWS', 'Docker', 'GitHub Actions', 'Enterprise Workflows']

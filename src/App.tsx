@@ -93,7 +93,7 @@ export default function App() {
         />
 
         {/* Tab View Container with Smooth Motion Transitions */}
-        <main className="flex-1 w-full">
+        <main className="flex-1 w-full flex flex-col">
           <AnimatePresence mode="wait">
             {currentTab === 'overview' && (
               <motion.div
@@ -102,6 +102,7 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.18, ease: 'easeOut' }}
+                className="w-full flex-1 flex flex-col"
               >
                 <OverviewView 
                   onNavigateToProjects={() => setCurrentTab('projects')} 

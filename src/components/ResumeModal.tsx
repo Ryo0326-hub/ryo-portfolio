@@ -302,7 +302,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                     </div>
                     <ul className="space-y-0.5 text-[10.5px] leading-relaxed text-zinc-900 pl-4 list-disc font-serif">
                       <li>
-                        Co-founded a 3-person software company and lead engineering for an NDA-protected enterprise workflow platform; secured its first recurring client contract worth <strong className="font-semibold text-black">US$1.5K/month</strong>
+                        Co-founded a 3-person software company and lead engineering for an NDA-protected enterprise workflow platform
                       </li>
                       <li>
                         Lead architecture and delivery of auditable RFQ intake, quotation, reconciliation, and reporting workflows using <strong className="font-semibold text-black">Next.js, TypeScript, PostgreSQL, and AWS</strong>; turn client feedback into staged releases with Docker and GitHub Actions

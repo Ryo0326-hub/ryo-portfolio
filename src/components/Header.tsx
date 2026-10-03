@@ -14,7 +14,14 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
   const [avatarSrc, setAvatarSrc] = useState(PROFILE_INFO.profileImage);
   const [avatarError, setAvatarError] = useState(false);
   return (
-    <header id="app-header" className="sticky top-0 z-50 w-full bg-[#0c0d10]/95 backdrop-blur-xl border-b border-[#202126]">
+    <header 
+      id="app-header" 
+      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
+        currentTab === 'overview'
+          ? 'bg-[#0c0d10]/95 md:bg-transparent border-b border-[#202126] md:border-transparent backdrop-blur-xl md:backdrop-blur-none'
+          : 'bg-[#0c0d10]/95 md:bg-[#0c0d10]/75 border-b border-[#202126]/80 backdrop-blur-xl'
+      }`}
+    >
       {/* Mobile Top Header */}
       <div className="flex md:hidden h-14 w-full px-3.5 items-center justify-between">
         <div 
@@ -87,7 +94,7 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onSelectTab, onOpenC
         )}
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-1 bg-[#14151b]/80 border border-[#23242a] p-1 rounded-lg backdrop-blur-sm">
           <button
             id="desktop-nav-overview"
             onClick={() => onSelectTab('overview')}

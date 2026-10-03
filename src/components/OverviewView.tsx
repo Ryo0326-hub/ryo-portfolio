@@ -242,64 +242,95 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
       {/* ========================================================================= */}
       {/* DESKTOP OVERVIEW (hidden md:flex) */}
       {/* ========================================================================= */}
-      <div className="hidden md:flex w-full flex-1 flex-col justify-center relative z-10">
-        <div className="w-full py-12 sm:py-16 lg:py-20">
-          <div className="max-w-[1060px] mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Translucent backing panel allowing the ASCII court art to be clearly visible */}
-            <div className="relative rounded-3xl bg-[#06101c]/45 backdrop-blur-[2px] border border-[#1e2a38]/40 p-8 sm:p-10 lg:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-                {/* Left Column: Text, CTAs & Social Links */}
-                <div className="lg:col-span-8 flex flex-col items-start text-left order-2 lg:order-1">
-                  {/* Headline */}
-                  <h1
-                    id="profile-name"
-                    className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight font-sans drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]"
-                  >
-                    Ryo Kitano
-                  </h1>
+      <div className="hidden md:flex w-full flex-1 flex-col justify-center items-center relative z-10 py-3 sm:py-4 lg:py-5 min-h-[calc(100vh-4rem)]">
+        <div className="w-full max-w-[1060px] mx-auto px-4 sm:px-6 lg:px-8 my-auto">
+          {/* Translucent backing panel allowing the ASCII court art to be clearly visible */}
+          <div className="relative rounded-3xl bg-[#06101c]/45 backdrop-blur-[2px] border border-[#1e2a38]/40 p-7 sm:p-8 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+              {/* Left Column: Text, CTAs & Social Links */}
+              <div className="lg:col-span-8 flex flex-col items-start text-left order-2 lg:order-1">
+                {/* Headline */}
+                <h1
+                  id="profile-name"
+                  className="text-4xl sm:text-5xl lg:text-[54px] font-bold tracking-tight text-white leading-tight font-sans drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]"
+                >
+                  Ryo Kitano
+                </h1>
 
-                  {/* Subheadline */}
-                  <p
-                    id="profile-headline"
-                    className="mt-3 text-lg sm:text-xl text-[#38bdf8] font-semibold tracking-tight font-sans drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]"
-                  >
-                    Jr AI/ML Engineer | Combinatorics &amp; Optimization @ UWaterloo
-                  </p>
+                {/* Subheadline */}
+                <p
+                  id="profile-headline"
+                  className="mt-2.5 sm:mt-3 text-lg sm:text-xl text-[#38bdf8] font-semibold tracking-tight font-sans drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]"
+                >
+                  Jr AI/ML Engineer | Combinatorics &amp; Optimization @ UWaterloo
+                </p>
 
-                  {/* Bio Summary with high contrast text and protective drop shadow */}
-                  <p
-                    id="profile-bio"
-                    className="mt-5 text-base sm:text-lg text-[#f1f5f9] leading-relaxed max-w-2xl font-normal font-sans drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)]"
-                  >
-                    My interests span machine learning, cryptography, and mathematical optimization. I have hands-on experience developing computer vision systems, LLM-powered applications, model-routing architectures, and data-driven products. I particularly enjoy translating research ideas and mathematical concepts into tools that solve real-world problems.
-                  </p>
+                {/* Bio Summary with high contrast text and protective drop shadow */}
+                <p
+                  id="profile-bio"
+                  className="mt-4 sm:mt-5 text-sm sm:text-base text-[#f1f5f9] leading-relaxed max-w-2xl font-normal font-sans drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)]"
+                >
+                  My interests span machine learning, cryptography, and mathematical optimization. I have hands-on experience developing computer vision systems, LLM-powered applications, model-routing architectures, and data-driven products. I particularly enjoy translating research ideas and mathematical concepts into tools that solve real-world problems.
+                </p>
 
-                  {/* Academic Highlight (Semi-transparent) */}
-                  <div className="mt-4 p-3.5 rounded-lg bg-[#0b1523]/45 backdrop-blur-[2px] border border-[#1f3045]/40 text-xs font-mono max-w-2xl space-y-1.5 shadow-sm">
-                    <div className="flex items-center text-[#38bdf8]">
-                      <span className="font-semibold flex items-center gap-1.5 text-sm drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                        <GraduationCap className="w-4 h-4 text-[#38bdf8]" />
-                        University of Waterloo · Bachelor of Mathematics, Honours (Co-op)
-                      </span>
-                    </div>
-                    <div className="text-[11.5px] text-[#cbd5e1] leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
-                      <span className="text-[#94a3b8] font-semibold">Coursework:</span> Optimization, Probability, Statistics, Linear Algebra II, Combinatorics, Graph Theory, Network Flow Theory, Algorithm Design
-                    </div>
+                {/* Academic Highlight (Semi-transparent) */}
+                <div className="mt-3.5 sm:mt-4 p-3 rounded-lg bg-[#0b1523]/45 backdrop-blur-[2px] border border-[#1f3045]/40 text-xs font-mono max-w-2xl space-y-1 shadow-sm">
+                  <div className="flex items-center text-[#38bdf8]">
+                    <span className="font-semibold flex items-center gap-1.5 text-sm drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                      <GraduationCap className="w-4 h-4 text-[#38bdf8]" />
+                      University of Waterloo · Bachelor of Mathematics, Honours (Co-op)
+                    </span>
                   </div>
+                  <div className="text-[11.5px] text-[#cbd5e1] leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
+                    <span className="text-[#94a3b8] font-semibold">Coursework:</span> Optimization, Probability, Statistics, Linear Algebra II, Combinatorics, Graph Theory, Network Flow Theory, Algorithm Design
+                  </div>
+                </div>
 
-                  {/* Action Buttons */}
-                  <div id="profile-action-buttons" className="mt-8 flex flex-wrap items-center gap-3 w-full sm:w-auto">
-                    <button
-                      id="btn-view-projects"
-                      onClick={onNavigateToProjects}
-                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#38bdf8] hover:bg-[#38bdf8]/90 text-[#090d16] font-mono text-xs font-bold transition-all shadow-[0_0_16px_-3px_rgba(56,189,248,0.35)] cursor-pointer"
-                    >
-                      <ArrowDown className="w-4 h-4" />
-                      <span>View Projects</span>
-                    </button>
+                {/* Action Buttons */}
+                <div id="profile-action-buttons" className="mt-6 sm:mt-7 flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                  <button
+                    id="btn-view-projects"
+                    onClick={onNavigateToProjects}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#38bdf8] hover:bg-[#38bdf8]/90 text-[#090d16] font-mono text-xs font-bold transition-all shadow-[0_0_16px_-3px_rgba(56,189,248,0.35)] cursor-pointer"
+                  >
+                    <ArrowDown className="w-4 h-4" />
+                    <span>View Projects</span>
+                  </button>
 
+                  <a
+                    id="btn-view-resume-desktop"
+                    href={PROFILE_INFO.resumeUrl}
+                    onClick={(e) => {
+                      if (onOpenResume) {
+                        e.preventDefault();
+                        onOpenResume();
+                      }
+                    }}
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#121c2a]/80 backdrop-blur-[2px] text-[#f1f5f9] border border-[#233346] font-mono text-xs font-medium hover:border-[#38bdf8] hover:text-[#38bdf8] transition-colors cursor-pointer"
+                    title="Preview & Download Resume.pdf"
+                  >
+                    <FileText className="w-4 h-4 text-[#38bdf8]" />
+                    <span>Resume.pdf</span>
+                  </a>
+
+                  <button
+                    id="btn-get-in-touch"
+                    onClick={() => setIsContactOpen(true)}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#182333]/80 backdrop-blur-[2px] text-[#f1f5f9] border border-[#27374b] font-mono text-xs font-medium hover:bg-[#1e2c40] transition-colors cursor-pointer"
+                  >
+                    <Mail className="w-4 h-4 text-[#e5e7eb]" />
+                    <span>Get in Touch</span>
+                  </button>
+                </div>
+
+                {/* Bottom Social & School Telemetry */}
+                <div
+                  id="profile-footer-bar"
+                  className="mt-6 sm:mt-7 pt-5 w-full border-t border-[#1e2a38]/60 flex flex-col gap-2.5 text-xs font-mono text-[#cbd5e1]"
+                >
+                  <div className="flex items-center gap-6">
                     <a
-                      id="btn-view-resume-desktop"
+                      id="link-resume-footer"
                       href={PROFILE_INFO.resumeUrl}
                       onClick={(e) => {
                         if (onOpenResume) {
@@ -307,84 +338,52 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
                           onOpenResume();
                         }
                       }}
-                      className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#121c2a]/80 backdrop-blur-[2px] text-[#f1f5f9] border border-[#233346] font-mono text-xs font-medium hover:border-[#38bdf8] hover:text-[#38bdf8] transition-colors cursor-pointer"
-                      title="Preview & Download Resume.pdf"
+                      className="hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer text-[#38bdf8] drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
                     >
-                      <FileText className="w-4 h-4 text-[#38bdf8]" />
+                      <FileText className="w-3.5 h-3.5 text-[#38bdf8]" />
                       <span>Resume.pdf</span>
                     </a>
 
-                    <button
-                      id="btn-get-in-touch"
-                      onClick={() => setIsContactOpen(true)}
-                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#182333]/80 backdrop-blur-[2px] text-[#f1f5f9] border border-[#27374b] font-mono text-xs font-medium hover:bg-[#1e2c40] transition-colors cursor-pointer"
+                    <a
+                      id="link-github"
+                      href="https://github.com/Ryo0326-hub"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white transition-colors flex items-center gap-1.5 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
                     >
-                      <Mail className="w-4 h-4 text-[#e5e7eb]" />
-                      <span>Get in Touch</span>
+                      <span className="text-[#94a3b8] font-semibold">&lt;/&gt;</span>
+                      <span>github.com</span>
+                    </a>
+
+                    <a
+                      id="link-linkedin"
+                      href="https://linkedin.com/in/ryo-kitano"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white transition-colors flex items-center gap-1.5 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+                    >
+                      <Link className="w-3.5 h-3.5 text-[#94a3b8]" />
+                      <span>linkedin.com/in/ryo-kitano</span>
+                    </a>
+
+                    <button
+                      id="btn-email-link"
+                      onClick={() => setIsContactOpen(true)}
+                      className="hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+                    >
+                      <AtSign className="w-3.5 h-3.5 text-[#94a3b8]" />
+                      <span>Email</span>
                     </button>
                   </div>
 
-                  {/* Bottom Social & School Telemetry */}
-                  <div
-                    id="profile-footer-bar"
-                    className="mt-8 pt-6 w-full border-t border-[#1e2a38]/60 flex flex-col gap-3 text-xs font-mono text-[#cbd5e1]"
-                  >
-                    <div className="flex items-center gap-6">
-                      <a
-                        id="link-resume-footer"
-                        href={PROFILE_INFO.resumeUrl}
-                        onClick={(e) => {
-                          if (onOpenResume) {
-                            e.preventDefault();
-                            onOpenResume();
-                          }
-                        }}
-                        className="hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer text-[#38bdf8] drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-                      >
-                        <FileText className="w-3.5 h-3.5 text-[#38bdf8]" />
-                        <span>Resume.pdf</span>
-                      </a>
-
-                      <a
-                        id="link-github"
-                        href="https://github.com/Ryo0326-hub"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-white transition-colors flex items-center gap-1.5 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-                      >
-                        <span className="text-[#94a3b8] font-semibold">&lt;/&gt;</span>
-                        <span>github.com</span>
-                      </a>
-
-                      <a
-                        id="link-linkedin"
-                        href="https://linkedin.com/in/ryo-kitano"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-white transition-colors flex items-center gap-1.5 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-                      >
-                        <Link className="w-3.5 h-3.5 text-[#94a3b8]" />
-                        <span>linkedin.com/in/ryo-kitano</span>
-                      </a>
-
-                      <button
-                        id="btn-email-link"
-                        onClick={() => setIsContactOpen(true)}
-                        className="hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-                      >
-                        <AtSign className="w-3.5 h-3.5 text-[#94a3b8]" />
-                        <span>Email</span>
-                      </button>
-                    </div>
-
-                    <div className="text-[#94a3b8] text-xs drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                      UWaterloo Math '29 · Combinatorics &amp; Optimization
-                    </div>
+                  <div className="text-[#94a3b8] text-xs drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                    UWaterloo Math '29 · Combinatorics &amp; Optimization
                   </div>
                 </div>
+              </div>
 
-                {/* Right Column: Portrait & Location */}
-                <div className="lg:col-span-4 flex flex-col items-center lg:items-start lg:pl-3 xl:pl-5 order-1 lg:order-2">
+              {/* Right Column: Portrait & Location */}
+              <div className="lg:col-span-4 flex flex-col items-center lg:items-start lg:pl-3 xl:pl-5 order-1 lg:order-2">
                   <div
                     id="profile-portrait-card"
                     className="group w-full max-w-[240px] sm:max-w-[260px] aspect-[3/4] rounded-2xl overflow-hidden bg-[#16171a] border border-[#27282d] relative shadow-2xl flex items-center justify-center transition-all duration-300 hover:border-[#38bdf8]/50 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.2)]"
@@ -435,6 +434,5 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigateToProjects
           </div>
         </div>
       </div>
-    </div>
   );
 };
